@@ -32,11 +32,11 @@ public class cameraController : MonoBehaviour
         // Rotating the player
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDirection = playerOrientation.forward * verticalInput + playerOrientation.right * horizontalInput;
+        Vector3 inputDirection = playerOrientation.forward*verticalInput + playerOrientation.right*horizontalInput;
 
         if(inputDirection != Vector3.zero)
         {
-            playerObject.forward = Vector3.Slerp(playerObject.forward, inputDirection.normalized, Time.deltaTime * rotationSpeed);
+            playerObject.forward = Vector3.Slerp(playerObject.forward, inputDirection.normalized, Time.deltaTime*rotationSpeed);
         }
         
     }
