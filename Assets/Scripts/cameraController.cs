@@ -8,6 +8,7 @@ public class cameraController : MonoBehaviour
     public Transform player;
     public Transform playerObject;
     public Rigidbody rb;
+    public Transform lookPoint;
     
     public float rotationSpeed;
 
@@ -24,20 +25,14 @@ public class cameraController : MonoBehaviour
     void Update()
     {
         // Getting the player direction vector
-        Vector3 viewDirection = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+        Vector3 viewDirection = lookPoint.position - new Vector3(transform.position.x, lookPoint.position.y, transform.position.z);
 
-        // Setting the player direction
+        // Setting the player orientation direction
         playerOrientation.forward = viewDirection.normalized;
 
-        // Rotating the player
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDirection = playerOrientation.forward*verticalInput + playerOrientation.right*horizontalInput;
-
-        if(inputDirection != Vector3.zero)
-        {
-            playerObject.forward = Vector3.Slerp(playerObject.forward, inputDirection.normalized, Time.deltaTime*rotationSpeed);
-        }
+        //setting player rotation
+        playerObject.forward = viewDirection.normalized;
+        
         
     }
 }
