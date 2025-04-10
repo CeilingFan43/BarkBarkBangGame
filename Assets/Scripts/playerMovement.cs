@@ -15,12 +15,14 @@ public class playerMovement : MonoBehaviour
     public float staminaRegen = 10;
     public Image stamina;
 
+    private CharacterController characterController;
     public Rigidbody player;
     public Transform playerOrientation;
     private Vector3 moveDirection;
 
     void Start()
     {
+        characterController = GetComponent<CharacterController>();
         currentStamina = maxStamina;
     }
 
@@ -52,14 +54,15 @@ public class playerMovement : MonoBehaviour
 
         moveDirection = forward * vertical + right * horizontal;
 
-        
-    }
 
-    void FixedUpdate()
-    {
+
+
         if(running == false)
         {
+        /*
         player.MovePosition(player.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+        */
+        characterController.Move(moveDirection*moveSpeed*Time.deltaTime);
         currentStamina += staminaRegen * Time.deltaTime;
             if(currentStamina > 100)
             {
@@ -72,7 +75,10 @@ public class playerMovement : MonoBehaviour
         
         else
         {
+            /*
         player.MovePosition(player.position + moveDirection * runSpeed * Time.fixedDeltaTime);
+        */
+        characterController.Move(moveDirection*runSpeed*Time.deltaTime);
         currentStamina -= runCost * Time.deltaTime;
             if(currentStamina < 0)
             {
@@ -80,5 +86,11 @@ public class playerMovement : MonoBehaviour
             }
         stamina.fillAmount = currentStamina / maxStamina;
         }
+        
+    }
+
+    void FixedUpdate()
+    {
+
     }
 }
