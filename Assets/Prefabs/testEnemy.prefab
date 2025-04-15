@@ -114,6 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   health: 100
+  damage: 10
+  attackCooldown: 1
 --- !u!143 &6256106675518088335
 CharacterController:
   m_ObjectHideFlags: 0

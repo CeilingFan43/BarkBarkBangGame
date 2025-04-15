@@ -11,6 +11,11 @@ public class enemyScript : MonoBehaviour
 
     public float health;
 
+    public float damage = 10f;
+    public float attackCooldown = 2f;
+
+    private bool canAttack = true;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -47,4 +52,26 @@ public class enemyScript : MonoBehaviour
         Debug.Log($"{gameObject.name} died.");
         Destroy(gameObject);
     }
+
+     private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && canAttack)
+        {
+            PlayerManagement pm = other.GetComponent<PlayerManagement>();
+            if (pm != null)
+            {
+                Debug.Log("enemy attacked");
+                pm.PlayerTakeDamage(damage);
+                StartCoroutine(StartAttackCooldown());
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator StartAttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
+
 }
