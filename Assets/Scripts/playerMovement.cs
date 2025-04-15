@@ -83,6 +83,7 @@ public class playerMovement : MonoBehaviour
             if(currentStamina < 0)
             {
                 currentStamina = 0;
+                running = false;
             }
         stamina.fillAmount = currentStamina / maxStamina;
         }
