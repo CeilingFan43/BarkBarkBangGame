@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8199235615565356049}
   - component: {fileID: 2886014200464823857}
   - component: {fileID: 6795518728452732427}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 850729873563191564}
   - component: {fileID: 1119463814210924813}
   - component: {fileID: 1186178044014594510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: face1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 5089632556678139205}
   - component: {fileID: 8455747684752476623}
   - component: {fileID: 5943243349466063161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: face1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
