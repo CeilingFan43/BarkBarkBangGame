@@ -33,6 +33,8 @@ public class enemyScript : MonoBehaviour
         moveDirection = ( playerPos.position - transform.position).normalized;
         moveDirection.y = 0;
         characterController.Move(moveDirection*moveSpeed*Time.deltaTime);
+        Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10f * Time.deltaTime);
     }
 
 
