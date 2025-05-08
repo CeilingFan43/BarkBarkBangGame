@@ -15,14 +15,16 @@ public class playerMovement : MonoBehaviour
     public float staminaRegen = 10;
     public Image stamina;
 
-    private CharacterController characterController;
-    public Rigidbody player;
+    public float gravity = -5f;
+    private  Vector3 gravityVelocity;
+
+    private CharacterController player;
     public Transform playerOrientation;
     private Vector3 moveDirection;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        player = GetComponent<CharacterController>();
         currentStamina = maxStamina;
     }
 
@@ -55,6 +57,14 @@ public class playerMovement : MonoBehaviour
         moveDirection = forward * vertical + right * horizontal;
 
 
+        if(!player.isGrounded)
+        {
+            gravityVelocity.y += gravity * Time.deltaTime;
+            player.Move(gravityVelocity * Time.deltaTime);
+        }
+
+        else
+        {
 
 
         if(running == false)
@@ -62,7 +72,7 @@ public class playerMovement : MonoBehaviour
         /*
         player.MovePosition(player.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
         */
-        characterController.Move(moveDirection*moveSpeed*Time.deltaTime);
+        player.Move(moveDirection*moveSpeed*Time.deltaTime);
         currentStamina += staminaRegen * Time.deltaTime;
             if(currentStamina > 100)
             {
@@ -78,7 +88,7 @@ public class playerMovement : MonoBehaviour
             /*
         player.MovePosition(player.position + moveDirection * runSpeed * Time.fixedDeltaTime);
         */
-        characterController.Move(moveDirection*runSpeed*Time.deltaTime);
+        player.Move(moveDirection*runSpeed*Time.deltaTime);
         currentStamina -= runCost * Time.deltaTime;
             if(currentStamina < 0)
             {
@@ -86,6 +96,8 @@ public class playerMovement : MonoBehaviour
                 running = false;
             }
         stamina.fillAmount = currentStamina / maxStamina;
+        }
+
         }
         
     }

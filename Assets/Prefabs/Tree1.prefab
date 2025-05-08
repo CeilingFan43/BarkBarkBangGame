@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 4039843921834339466}
   - component: {fileID: 4124682263409674847}
   - component: {fileID: -5610128621163990223}
+  - component: {fileID: 1932430506564765449}
   m_Layer: 0
   m_Name: Tree1
   m_TagString: Untagged
@@ -259,3 +260,33 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!205 &1932430506564765449
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7733633676896195199}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6620614193112385416}
+    - renderer: {fileID: 5125157854593638717}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6620614193112385416}
+    - renderer: {fileID: 5125157854593638717}
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6620614193112385416}
+    - renderer: {fileID: 5125157854593638717}
+  m_Enabled: 1
