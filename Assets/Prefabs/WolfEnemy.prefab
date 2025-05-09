@@ -172,17 +172,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7787a35eb02a3924cbae11e0d690f69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
+  agent: {fileID: 845578863507677496}
   player: {fileID: 0}
   Ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   Player:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 0
-  sightRange: 0
-  attackRange: 0
+  walkPointRange: 20
+  sightRange: 30
+  attackRange: 1
   playerInSightRange: 0
   playerInAttackRange: 0

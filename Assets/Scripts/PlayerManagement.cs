@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class PlayerManagement : MonoBehaviour
 {
@@ -11,14 +12,20 @@ public class PlayerManagement : MonoBehaviour
     private float currentBattery;
     public float batteryDrain;
     private gamemanager gameManager;
-    //public float batteryRegen;
 
     //Flashlight
     public Light flashlight;
-    //private bool flashOn = true;
+
+    public GameObject player;
+    public Mesh Stage1Mesh;
+  
+
+    public Mesh Stage2Mesh;
+    public Material Stage2Mat;
 
 
-
+    private MeshFilter playerMesh;
+    private MeshRenderer playerRend;
 
     public Image health;
     public Image battery;
@@ -29,7 +36,12 @@ public class PlayerManagement : MonoBehaviour
     {
         gameManager = FindObjectOfType<gamemanager>();
         currentHealth = maxHealth;
-        currentBattery = maxBattery;        
+        currentBattery = maxBattery;   
+        player = GameObject.Find("PlayerObject");
+        playerMesh = player.GetComponent<MeshFilter>();
+        playerRend = player.GetComponent<MeshRenderer>();
+
+
     }
 
     void Update()
@@ -50,28 +62,6 @@ public class PlayerManagement : MonoBehaviour
             flashlight.enabled = false;
         }
 
-        /*
-        if((flashlight.enabled == true) && (currentBattery) > 0)
-        {
-            currentBattery -= batteryDrain * Time.deltaTime;
-        }
-
-        else if (currentBattery <= 0)
-        {
-            flashlight.enabled = false;
-        }
-
-        else if(flashlight.enabled == false)
-        {
-            currentBattery += batteryRegen * Time.deltaTime;
-        }
-
-
-        if(currentBattery > maxBattery)
-        {
-            currentBattery = maxBattery;
-        }
-        */
         battery.fillAmount = currentBattery / maxBattery;
         health.fillAmount = currentHealth / maxHealth;
 
@@ -81,6 +71,16 @@ public class PlayerManagement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if(currentHealth <= 50 && currentHealth > 0)
+        {
+            Material[] materials = playerRend.materials;
+            Debug.Log(materials);
+
+            playerMesh.mesh = Stage2Mesh;
+            Debug.Log("Half health");
+
+        }
+
         if(currentHealth <= 0)
         {
             gameManager.PlayerDied();
@@ -104,5 +104,10 @@ public class PlayerManagement : MonoBehaviour
     {
         currentBattery += amount;
         Debug.Log(currentBattery);
+    }
+
+    public void Stage1Change(MeshFilter myMesh, MeshRenderer myRend)
+    {
+        
     }
 }
