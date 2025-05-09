@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2103379118572619687}
   - component: {fileID: 2103379118572619684}
   - component: {fileID: 2103379118572619685}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FrontFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103379118821723513}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2103379120253907116}
   - component: {fileID: 2103379120253907114}
   - component: {fileID: 2103379120253907113}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 2103379120409245038}
   - component: {fileID: 2103379120409245039}
   - component: {fileID: 2103379120409245040}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103379120411598120}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
