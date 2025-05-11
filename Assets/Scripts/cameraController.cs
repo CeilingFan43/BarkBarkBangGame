@@ -6,8 +6,8 @@ public class cameraController : MonoBehaviour
 {
     public Transform playerOrientation;
     public Transform player;
-    public Transform playerObject;
-    public Rigidbody rb;
+    public Transform playerPhase1;
+    public Transform playerPhase2;
     public Transform lookPoint;
     
     public float rotationSpeed;
@@ -31,7 +31,8 @@ public class cameraController : MonoBehaviour
         playerOrientation.forward = viewDirection.normalized;
 
         //setting player rotation
-        playerObject.forward = viewDirection.normalized;
+        playerPhase1.forward = viewDirection.normalized;
+        playerPhase2.forward = viewDirection.normalized;
         
         
     }

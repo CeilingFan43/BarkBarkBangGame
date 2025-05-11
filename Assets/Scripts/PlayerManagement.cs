@@ -16,19 +16,14 @@ public class PlayerManagement : MonoBehaviour
     //Flashlight
     public Light flashlight;
 
-    public GameObject player;
-    public Mesh Stage1Mesh;
-  
-
-    public Mesh Stage2Mesh;
-    public Material Stage2Mat;
-
-
-    private MeshFilter playerMesh;
-    private MeshRenderer playerRend;
+    public GameObject playerFull;
+    public GameObject playerHalf;
+    public GameObject playerDead;
 
     public Image health;
     public Image battery;
+
+    public GameObject player;
 
 
     // Start is called before the first frame update
@@ -38,8 +33,8 @@ public class PlayerManagement : MonoBehaviour
         currentHealth = maxHealth;
         currentBattery = maxBattery;   
         player = GameObject.Find("PlayerObject");
-        playerMesh = player.GetComponent<MeshFilter>();
-        playerRend = player.GetComponent<MeshRenderer>();
+        CheckHealth();
+
 
 
     }
@@ -71,20 +66,7 @@ public class PlayerManagement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if(currentHealth <= 50 && currentHealth > 0)
-        {
-            Material[] materials = playerRend.materials;
-            Debug.Log(materials);
 
-            playerMesh.mesh = Stage2Mesh;
-            Debug.Log("Half health");
-
-        }
-
-        if(currentHealth <= 0)
-        {
-            gameManager.PlayerDied();
-        }
     }
 
     public void PlayerTakeDamage(float amount)
@@ -92,22 +74,41 @@ public class PlayerManagement : MonoBehaviour
         currentHealth -= amount;
         Debug.Log("taken damage instance");
         Debug.Log(currentHealth);
+        CheckHealth();
     }
 
     public void HealthPickup(float amount)
     {
         currentHealth += amount;
         Debug.Log(currentHealth);
+        CheckHealth();
     }
 
-    public void batteryPickup(float amount)
+    public void BatteryPickup(float amount)
     {
         currentBattery += amount;
         Debug.Log(currentBattery);
     }
 
-    public void Stage1Change(MeshFilter myMesh, MeshRenderer myRend)
+    public void CheckHealth()
     {
-        
+        if(currentHealth <= 0)
+        {
+            gameManager.PlayerDied();
+        }
+
+        else if(0 < currentHealth && currentHealth < 50)
+        {
+            playerFull.SetActive(false);
+            playerHalf.SetActive(true);
+            
+        }
+        else
+        {
+            playerFull.SetActive(true);
+            playerHalf.SetActive(false);
+        }
     }
+
 }
+

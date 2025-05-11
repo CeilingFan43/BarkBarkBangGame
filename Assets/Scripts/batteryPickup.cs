@@ -13,7 +13,7 @@ public class batteryPickup : MonoBehaviour
             PlayerManagement player = other.GetComponent<PlayerManagement>();
             if (player != null)
             {
-                player.batteryPickup(batteryAmount);
+                player.BatteryPickup(batteryAmount);
                 Destroy(gameObject); // Destroy pickup after use
             }
         }
