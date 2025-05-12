@@ -11,7 +11,7 @@ public class PlayerManagement : MonoBehaviour
     public float maxBattery = 100;
     private float currentBattery;
     public float batteryDrain;
-    private gamemanager gameManager;
+    private gameManager gameManager;
 
     //Flashlight
     public Light flashlight;
@@ -29,10 +29,10 @@ public class PlayerManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<gamemanager>();
+        gameManager = FindObjectOfType<gameManager>();
         currentHealth = maxHealth;
         currentBattery = maxBattery;   
-        player = GameObject.Find("PlayerObject");
+        player = GameObject.Find("Player");
         CheckHealth();
 
 
@@ -63,11 +63,6 @@ public class PlayerManagement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-
-    }
 
     public void PlayerTakeDamage(float amount)
     {

@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class enemyScript : MonoBehaviour
 {
-    public float moveSpeed;
-    private Transform playerPos;
-    private CharacterController characterController;
-    private Vector3 moveDirection;
-
     public float health;
-
     public float damage = 10f;
     public float attackCooldown = 2f;
 
@@ -18,23 +12,11 @@ public class enemyScript : MonoBehaviour
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            playerPos = player.transform;
+
         }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        //moveDirection = ( playerPos.position - transform.position).normalized;
-        //moveDirection.y = 0;
-        //characterController.Move(moveDirection*moveSpeed*Time.deltaTime);
-        //Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10f * Time.deltaTime);
     }
 
 
@@ -75,5 +57,6 @@ public class enemyScript : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
     }
+    
 
 }

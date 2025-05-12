@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 3478390931160823330}
   - component: {fileID: 1702727168231408360}
   - component: {fileID: 8225934678923861854}
-  - component: {fileID: 5597312062356555221}
   - component: {fileID: 845578863507677496}
-  - component: {fileID: 359416059091017966}
   - component: {fileID: 916147870231520725}
   m_Layer: 0
   m_Name: WolfEnemy
@@ -101,25 +99,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3666065295405842326, guid: 76b945eaa732f9845b84bd551e9b1f19, type: 3}
---- !u!114 &5597312062356555221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910203379651224381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a4a48e23cbc4940b35b1b426b0b012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  health: 100
-  damage: 10
-  attackCooldown: 1
 --- !u!195 &845578863507677496
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -142,24 +124,6 @@ NavMeshAgent:
   m_BaseOffset: 0.04637363
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!143 &359416059091017966
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910203379651224381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 0.09274726
-  m_Radius: 0.07901115
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &916147870231520725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7787a35eb02a3924cbae11e0d690f69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  damage: 10
+  attackCooldown: 2
   agent: {fileID: 845578863507677496}
   player: {fileID: 0}
   Ground:
@@ -180,6 +147,7 @@ MonoBehaviour:
   Player:
     serializedVersion: 2
     m_Bits: 128
+  pm: {fileID: 0}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 20
   sightRange: 30

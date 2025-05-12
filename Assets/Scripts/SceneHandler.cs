@@ -17,8 +17,16 @@ public class SceneHandler : MonoBehaviour
         
     }
 
-    public void SwapScene()
+    public void GoToGameScene()
     {
-        SceneManager.LoadScene("testScene");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void GoToMenuScene()
+    {
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
     }
 }

@@ -5,10 +5,19 @@ using UnityEngine.AI;
 
 public class newEnemyAi : MonoBehaviour
 {
-	
+   AudioManager audioManager;
+   //private bool playerPreviouslyDetected = false;
+   private bool isChasing = false;
+   //Enmemy values
+   public float health;
+   public float damage = 10f;
+   public float attackCooldown = 2f;
+   private bool canAttack = true;
+
    public NavMeshAgent agent;
    public Transform player;
    public LayerMask Ground, Player;
+   public PlayerManagement pm;
    
 
    public Vector3 walkPoint;
@@ -20,31 +29,68 @@ public class newEnemyAi : MonoBehaviour
 
    private void Awake()
    {
-		  player = GameObject.Find("PlayerObject").transform;
-		  agent = GetComponent<NavMeshAgent>();
+      audioManager = FindObjectOfType<AudioManager>();
+		player = GameObject.Find("Player").transform;
+		agent = GetComponent<NavMeshAgent>();
+      pm = FindObjectOfType<PlayerManagement>();
+      
    }
 
-   private void Update()
-   {
-		  playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
-		  playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
+private void Update()
+{
+    playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
+    playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
 
-		  if (!playerInSightRange && !playerInAttackRange) Patroling();
-		  if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-		  if (playerInSightRange && playerInAttackRange) AttackPlayer();
-   }
+   bool playerDetected = playerInSightRange || playerInAttackRange;
+
+    if (!playerDetected)
+    {
+        if (isChasing)
+        {
+            audioManager.EndChase();
+            isChasing = false;
+        }
+        Patroling();
+    }
+    else
+    {
+        if (!isChasing)
+        {
+            audioManager.StartChase();
+            isChasing = true;
+        }
+        if (playerInSightRange && !playerInAttackRange)
+        {
+            ChasePlayer();
+        }
+        else if (playerInSightRange && playerInAttackRange)
+        {
+            AttackPlayer();
+        }
+    }
+}
 
    private void Patroling()
    {
 		if (!walkPointSet) SearchWalkPoint();
 
 		if (walkPointSet)
-			agent.SetDestination(walkPoint);
+      {
+		agent.SetDestination(walkPoint);
+      }
 
 		Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
 		if (distanceToWalkPoint.magnitude < 1f)
-			walkPointSet = false;
+      {
+		walkPointSet = false;
+      }
+
+    if (isChasing)
+    {
+        audioManager.EndChase();
+        isChasing = false;
+    }
    }
 
    private void SearchWalkPoint()
@@ -66,8 +112,20 @@ public class newEnemyAi : MonoBehaviour
    private void AttackPlayer()
    {
 		agent.SetDestination(transform.position);
-
 		transform.LookAt(player);
+
+      // Attack the player if possible
+      if (canAttack)
+      {
+         PlayerManagement pm = player.GetComponent<PlayerManagement>();
+         if (pm != null)
+         {
+            Debug.Log($"{gameObject.name} attacked {player.name}");
+            pm.PlayerTakeDamage(damage);
+            StartCoroutine(StartAttackCooldown());
+         }
+      }
+
    }
 
    private void OnDrawGizmosSelected()
@@ -77,4 +135,32 @@ public class newEnemyAi : MonoBehaviour
 		  Gizmos.color = Color.yellow;
 		  Gizmos.DrawWireSphere(transform.position, sightRange);
    }
+
+   // Enemy Damage / Attack Functions
+   public void TakeDamage(float amount)
+   {
+      health -= amount;
+      Debug.Log($"{gameObject.name} took {amount} damage, {health} HP left.");
+
+      if (health <= 0)
+      {
+         Die();
+      }
+   }
+
+   void Die()
+   {
+      Debug.Log($"{gameObject.name} died.");
+      audioManager.EndChase();
+      //playerPreviouslyDetected = false;
+      Destroy(gameObject);
+   }
+
+   private System.Collections.IEnumerator StartAttackCooldown()
+   {
+      canAttack = false;
+      yield return new WaitForSeconds(attackCooldown);
+      canAttack = true;
+   }
 }
+    

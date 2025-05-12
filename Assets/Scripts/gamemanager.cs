@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class gamemanager : MonoBehaviour
+public class gameManager : MonoBehaviour
 {
     public float maxTime = 240f;
     private float currentTime;    

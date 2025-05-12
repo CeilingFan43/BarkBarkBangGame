@@ -36,7 +36,7 @@ public class playerAttack : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy"))
             {
-                enemy.GetComponent<enemyScript>().TakeDamage(damage);
+                enemy.GetComponent<newEnemyAi>().TakeDamage(damage);
             }
         }
 
