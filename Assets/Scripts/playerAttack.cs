@@ -7,6 +7,7 @@ public class playerAttack : MonoBehaviour
     public float attackRange;
     public float attackRadius;
     public float damage;
+    public float attackCooldown;
     public Transform attackOrigin;
     public LayerMask enemyLayer;
 
@@ -38,6 +39,11 @@ public class playerAttack : MonoBehaviour
             {
                 enemy.GetComponent<newEnemyAi>().TakeDamage(damage);
             }
+
+            if (enemy.CompareTag("EnemySpawner"))
+            {
+                enemy.GetComponentInParent<EnemySpawner>().TakeDamage(damage);
+            }
         }
 
         StartCoroutine(AttackCooldown());
@@ -53,7 +59,7 @@ public class playerAttack : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(attackCooldown);
         myAnimator.SetBool("attacked", false);
         Debug.Log("attack cooldown method called");
     }

@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7787a35eb02a3924cbae11e0d690f69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 150
   damage: 10
-  attackCooldown: 2
+  attackCooldown: 1.5
   agent: {fileID: 845578863507677496}
   player: {fileID: 0}
   Ground:

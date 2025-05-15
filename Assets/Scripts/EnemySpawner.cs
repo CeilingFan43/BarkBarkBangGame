@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float health = 150f;
+
     public GameObject wolfPrefab;
     public float initialSpawnRate = 6f;
     public float spawnRateIncreaseInterval = 60f;
@@ -42,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnWolf()
     {
-        Vector3 randomSpawnPosition = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
+        Vector3 randomSpawnPosition = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
         Instantiate(wolfPrefab, randomSpawnPosition, Quaternion.identity);
     }
 
@@ -56,4 +58,27 @@ public class EnemySpawner : MonoBehaviour
         currentSpawnRate = Mathf.Min(currentSpawnRate + (spawnRateIncreaseAmount / 60f), maxSpawnRate / 60f);
         Debug.Log("Spawn rate increased to: " + currentSpawnRate * 60f + " wolves per minute.");
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red; // Set the color of the gizmo
+        Gizmos.DrawWireSphere(transform.position, spawnRadius); // Draw a wireframe sphere
+    }
+
+    public void TakeDamage(float amount)
+   {
+      health -= amount;
+      Debug.Log($"{gameObject.name} took {amount} damage, {health} HP left.");
+
+      if (health <= 0)
+      {
+         Die();
+      }
+   }
+
+    void Die()
+   {
+      Debug.Log($"{gameObject.name} died.");
+      Destroy(gameObject);
+   }
 }

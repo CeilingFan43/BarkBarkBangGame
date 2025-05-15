@@ -28,64 +28,64 @@ public class playerMovement : MonoBehaviour
         currentStamina = maxStamina;
     }
 
-
-    // CHANGE OUT MOVEMENT FOR CHARACTER CONTROLLER NOT RIGIDBODY
-    // CHANGE OUT MOVEMENT FOR CHARACTER CONTROLLER NOT RIGIDBODY
-    // CHANGE OUT MOVEMENT FOR CHARACTER CONTROLLER NOT RIGIDBODY
-
-    void Update()
-{
-    float horizontal = Input.GetAxisRaw("Horizontal");
-    float vertical = Input.GetAxisRaw("Vertical");
-    if (Input.GetKeyDown("left shift"))
+   void Update()
     {
-        running = true;
-    }
-    else if (Input.GetKeyUp("left shift"))
-    {
-        running = false;
-    }
-
-    Vector3 forward = playerOrientation.forward;
-    Vector3 right = playerOrientation.right;
-
-    forward.y = 0;
-    right.y = 0;
-    forward.Normalize();
-    right.Normalize();
-
-    moveDirection = (forward * vertical + right * horizontal).normalized;
-
-
-    if (!player.isGrounded)
-    {
-        gravityVelocity.y += gravity * Time.deltaTime;
-        player.Move(gravityVelocity.y * Time.deltaTime * Vector3.up + moveDirection * (running ? runSpeed : moveSpeed) * Time.deltaTime);
-    }
-    else
-    {
-        gravityVelocity.y = 0f; // Reset vertical velocity when grounded
-        player.Move(moveDirection * (running ? runSpeed : moveSpeed) * Time.deltaTime);
-        currentStamina += staminaRegen * Time.deltaTime;
-        if (currentStamina > 100)
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown("left shift"))
         {
-            currentStamina = 100;
+            running = true;
         }
-        stamina.fillAmount = currentStamina / maxStamina;
-    }
-
-    if (running && player.isGrounded)
-    {
-        currentStamina -= runCost * Time.deltaTime;
-        if (currentStamina < 0)
+        else if (Input.GetKeyUp("left shift"))
         {
-            currentStamina = 0;
             running = false;
         }
-        stamina.fillAmount = currentStamina / maxStamina;
+
+        Vector3 forward = playerOrientation.forward;
+        Vector3 right = playerOrientation.right;
+
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+        moveDirection = (forward * vertical + right * horizontal).normalized;
+
+
+        if (!player.isGrounded)
+        {
+            gravityVelocity.y += gravity * Time.deltaTime;
+            player.Move(gravityVelocity.y * Time.deltaTime * Vector3.up + moveDirection * (running ? runSpeed : moveSpeed) * Time.deltaTime);
+        }
+        else
+        {
+            gravityVelocity.y = 0f; // Reset vertical velocity when grounded
+            player.Move(moveDirection * (running ? runSpeed : moveSpeed) * Time.deltaTime);
+        }
+
+        //drain stamina.  Removed the check for isGrounded
+        if (running)
+        {
+            currentStamina -= runCost * Time.deltaTime;
+            if (currentStamina < 0)
+            {
+                currentStamina = 0;
+                running = false;
+            }
+            stamina.fillAmount = currentStamina / maxStamina;
+        }
+
+        else
+        {
+            currentStamina += staminaRegen * Time.deltaTime;
+            if (currentStamina > 100)
+            {
+                currentStamina = 100;
+            }
+            stamina.fillAmount = currentStamina / maxStamina;
+        }
     }
 
-}
     void FixedUpdate()
     {
 
