@@ -52,6 +52,7 @@ public class NoteScript : MonoBehaviour
             if (noteUI != null)
             {
                 noteUI.SetActive(true);
+                buttonPrompt.SetActive(false);
             }
             else
             {
@@ -64,6 +65,7 @@ public class NoteScript : MonoBehaviour
             if (noteUI != null)
             {
                 noteUI.SetActive(false);
+                buttonPrompt.SetActive(true);
             }
             else
             {

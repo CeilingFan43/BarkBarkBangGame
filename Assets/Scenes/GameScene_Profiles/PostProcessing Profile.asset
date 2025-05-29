@@ -107,7 +107,7 @@ MonoBehaviour:
     value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     overrideState: 1
-    value: {x: 0.9517061, y: 0.9465644, z: 1, w: 0}
+    value: {x: 0.8742377, y: 0.8858468, z: 1, w: 0}
   gain:
     overrideState: 0
     value: {x: 1, y: 1, z: 1, w: 0}
@@ -1350,7 +1350,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.19
+    value: 0.41
   color:
     overrideState: 1
     value: {r: 0.06835171, g: 0.1101719, b: 0.16981131, a: 1}
@@ -1396,7 +1396,7 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 1
-    value: 3.48
+    value: 3.3
   aperture:
     overrideState: 0
     value: 5.6
@@ -1433,7 +1433,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.24
+    value: 0.408
   smoothness:
     overrideState: 0
     value: 0.2
@@ -1471,10 +1471,10 @@ MonoBehaviour:
     value: {x: 50, y: 95}
   minLuminance:
     overrideState: 1
-    value: -0.39
+    value: 0.24
   maxLuminance:
     overrideState: 1
-    value: 4.56
+    value: 4.91
   keyValue:
     overrideState: 0
     value: 1
