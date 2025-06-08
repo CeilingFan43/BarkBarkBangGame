@@ -8,7 +8,7 @@ public class PlayerManagement : MonoBehaviour
 {
     public float maxHealth = 100;
     private float currentHealth;
-    public float maxBattery = 100;
+    public float maxBattery = 1000;
     private float currentBattery;
     public float batteryDrain;
     private gameManager gameManager;
@@ -83,12 +83,19 @@ public class PlayerManagement : MonoBehaviour
     {
         currentBattery += amount;
         Debug.Log(currentBattery);
+
+        if (currentBattery>1000)
+        {
+            currentBattery = 1000;
+        }
     }
 
     public void CheckHealth()
     {
         if(currentHealth <= 0)
         {
+            playerHalf.SetActive(false);
+            playerDead.SetActive(true);
             gameManager.PlayerDied();
         }
 

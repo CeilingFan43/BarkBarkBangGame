@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class batteryPickup : MonoBehaviour
 {
-    public float batteryAmount = 20f;
+    public float batteryAmount = 200f;
     public float frequency = 0.5f;
     public float amplitude = 1f;
 
