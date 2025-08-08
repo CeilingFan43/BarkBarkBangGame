@@ -15,7 +15,10 @@ public class EnemySpawner : MonoBehaviour
     private float timeElapsed = 0f;
     private float currentSpawnRate;
     private float nextSpawnTime;
-    private float lastIncreaseTime = 0f; // To track when the spawn rate was last increased
+
+    // To track when the spawn rate was last increased
+    private float lastIncreaseTime = 0f; 
+    
     public float spawnRadius = 50f;
 
     void Start()
@@ -24,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
         SetNextSpawnTime();
     }
 
+    //Wolf spawn scaling
     void Update()
     {
         timeElapsed += Time.deltaTime;
@@ -42,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    //Wolf spawning 
     void SpawnWolf()
     {
         Vector3 randomSpawnPosition = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
@@ -59,12 +64,14 @@ public class EnemySpawner : MonoBehaviour
         Debug.Log("Spawn rate increased to: " + currentSpawnRate * 60f + " wolves per minute.");
     }
 
+    //Gizmos for spawns
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red; // Set the color of the gizmo
-        Gizmos.DrawWireSphere(transform.position, spawnRadius); // Draw a wireframe sphere
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
 
+    //EnemySpawner damage function
     public void TakeDamage(float amount)
    {
       health -= amount;
@@ -76,6 +83,7 @@ public class EnemySpawner : MonoBehaviour
       }
    }
 
+    //EnemSpawner destroy
     void Die()
    {
       Debug.Log($"{gameObject.name} died.");

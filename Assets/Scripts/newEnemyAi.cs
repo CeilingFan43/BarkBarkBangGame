@@ -8,6 +8,7 @@ public class newEnemyAi : MonoBehaviour
    AudioManager audioManager;
    //private bool playerPreviouslyDetected = false;
    private bool isChasing = false;
+
    //Enmemy values
    public float health;
    public float damage = 10f;
@@ -27,6 +28,7 @@ public class newEnemyAi : MonoBehaviour
    public float sightRange, attackRange;
    public bool playerInSightRange, playerInAttackRange;
 
+   //Locating components and player
    private void Awake()
    {
       audioManager = FindObjectOfType<AudioManager>();
@@ -38,6 +40,7 @@ public class newEnemyAi : MonoBehaviour
 
 private void Update()
 {
+   //Sphere check for player in range
     playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
     playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
 

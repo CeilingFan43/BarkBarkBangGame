@@ -63,7 +63,7 @@ public class playerMovement : MonoBehaviour
             player.Move(moveDirection * (running ? runSpeed : moveSpeed) * Time.deltaTime);
         }
 
-        //drain stamina.  Removed the check for isGrounded
+        //drain stamina.
         if (running)
         {
             currentStamina -= runCost * Time.deltaTime;

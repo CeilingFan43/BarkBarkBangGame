@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-    public Transform playerOrientation;
     public Transform player;
-    public Transform lookPoint;
-    
     public float rotationSpeed;
 
 
-
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -20,15 +15,11 @@ public class cameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        // Getting the player direction vector
-        Vector3 viewDirection = lookPoint.position - new Vector3(transform.position.x, lookPoint.position.y, transform.position.z);
+        Vector3 cameraForward = Camera.main.transform.forward;
 
-        // Setting the player orientation direction
-        playerOrientation.forward = viewDirection.normalized;
-
-        //setting player rotation
-        player.forward = viewDirection.normalized;
+        Vector3 LookDir = new Vector3(cameraForward.x, 0f, cameraForward.z).normalized;
+        player.forward = LookDir;
     }
 }
