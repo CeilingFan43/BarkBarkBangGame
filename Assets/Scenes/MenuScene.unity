@@ -518,10 +518,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Settings
+  m_text: SETTINGS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b9cfbdcee2d449842851c9833a5d4118, type: 2}
-  m_sharedMaterial: {fileID: 7729447028074689554, guid: b9cfbdcee2d449842851c9833a5d4118, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a60067bab667a1a4fa20c5ee8579163b, type: 2}
+  m_sharedMaterial: {fileID: 6062006322998224242, guid: a60067bab667a1a4fa20c5ee8579163b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -545,13 +545,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -726,10 +726,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start Game
+  m_text: START GAME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b9cfbdcee2d449842851c9833a5d4118, type: 2}
-  m_sharedMaterial: {fileID: 7729447028074689554, guid: b9cfbdcee2d449842851c9833a5d4118, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a60067bab667a1a4fa20c5ee8579163b, type: 2}
+  m_sharedMaterial: {fileID: 6062006322998224242, guid: a60067bab667a1a4fa20c5ee8579163b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -753,13 +753,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -841,8 +841,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 542, y: 112}
-  m_SizeDelta: {x: 400.0077, y: 335.8337}
+  m_AnchoredPosition: {x: 557, y: 0}
+  m_SizeDelta: {x: 609.3784, y: 335.8337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1305748471
 MonoBehaviour:
