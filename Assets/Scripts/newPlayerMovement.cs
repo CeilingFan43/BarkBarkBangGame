@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class playerMovement : MonoBehaviour
+public class newPlayerMovement : MonoBehaviour
 {
+    //Setting up variables
     public float moveSpeed = 5;
     public float runSpeed = 10;
     private bool running;
@@ -13,25 +14,33 @@ public class playerMovement : MonoBehaviour
     public float maxStamina = 100;
     public float currentStamina;
     public float staminaRegen = 10;
-    public Image stamina;
+    public float rotationSpeed = 5f;
 
-    public float gravity = -5f;
-    private Vector3 gravityVelocity;
+    public Transform cameraPos;
 
-    private CharacterController player;
-    public Transform playerOrientation;
     private Vector3 moveDirection;
 
+    //Setting up dependencies
+    public Image stamina;
+    private CharacterController player;
+    public Transform playerOrientation;
+
+
+
+    // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<CharacterController>();
-        currentStamina = maxStamina;
+        currentStamina = maxStamina;   
     }
 
-   void Update()
+    // Update is called once per frame
+    void Update()
     {
+        //WASD Input values
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+
         if (Input.GetKeyDown("left shift"))
         {
             running = true;
@@ -41,27 +50,20 @@ public class playerMovement : MonoBehaviour
             running = false;
         }
 
-        Vector3 forward = playerOrientation.forward;
-        Vector3 right = playerOrientation.right;
-
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
-
-        moveDirection = (forward * vertical + right * horizontal).normalized;
-        playerOrientation.forward = moveDirection;
+        //Movement Vectors
+        Vector3 right = cameraPos.right;
+        Vector3 forward = Vector3.Cross(right, Vector3.up);
 
 
-        if (!player.isGrounded)
+
+        //Moving the Player
+        moveDirection = (forward * vertical + right * horizontal) * (running ? runSpeed : moveSpeed);
+        player.SimpleMove(moveDirection);
+
+        //Rotating the player to movementDirection
+        if (moveDirection != Vector3.zero)
         {
-            gravityVelocity.y += gravity * Time.deltaTime;
-            player.Move(gravityVelocity.y * Time.deltaTime * Vector3.up + moveDirection * (running ? runSpeed : moveSpeed) * Time.deltaTime);
-        }
-        else
-        {
-            gravityVelocity.y = 0f; // Reset vertical velocity when grounded
-            player.Move(moveDirection * (running ? runSpeed : moveSpeed) * Time.deltaTime);
+        playerOrientation.rotation = Quaternion.Slerp (playerOrientation.rotation, Quaternion.LookRotation(moveDirection), Time.deltaTime * rotationSpeed);
         }
 
         //drain stamina.
@@ -85,5 +87,6 @@ public class playerMovement : MonoBehaviour
             }
             stamina.fillAmount = currentStamina / maxStamina;
         }
+
     }
 }

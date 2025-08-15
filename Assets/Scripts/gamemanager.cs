@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class gameManager : MonoBehaviour
 {
     public float maxTime = 240f;
-    private float currentTime;    
+    public float currentTime;    
     public Text timeText;
 
     public GameObject deathScreenUI; 

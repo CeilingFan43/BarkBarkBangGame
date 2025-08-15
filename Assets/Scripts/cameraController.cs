@@ -1,25 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class cameraController : MonoBehaviour
 {
-    public Transform player;
-    public float rotationSpeed;
-
+    public Transform rotatePoint;       
+    public Transform cameraPivot;
+    public Camera mainCam;
+    public float sensitivityX = 3f;
+    public float sensitivityY = 3f;
+    private float pitch = 0f; 
 
     void Start()
     {
+        //Initialising pitch 
+        Vector3 angles = transform.position - cameraPivot.position;
+        pitch = 0f;
+
+        //Locking cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-        Vector3 cameraForward = Camera.main.transform.forward;
+        //User mouse input
+        float mouseX = Input.GetAxis("Mouse X") * sensitivityX;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY;
 
-        Vector3 LookDir = new Vector3(cameraForward.x, 0f, cameraForward.z).normalized;
-        player.forward = LookDir;
+        //Rotating camera
+        cameraPivot.RotateAround(rotatePoint.position, Vector3.up, mouseX);
+        cameraPivot.RotateAround(rotatePoint.position, cameraPivot.right, -mouseY);
     }
+        
 }

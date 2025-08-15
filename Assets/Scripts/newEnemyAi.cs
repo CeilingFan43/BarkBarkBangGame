@@ -28,6 +28,9 @@ public class newEnemyAi : MonoBehaviour
    public float sightRange, attackRange;
    public bool playerInSightRange, playerInAttackRange;
 
+   public GameObject deathEffect;
+   public ParticleSystem deathParticles;
+
    //Locating components and player
    private void Awake()
    {
@@ -157,6 +160,7 @@ private void Update()
       audioManager.EndChase();
       //playerPreviouslyDetected = false;
       Destroy(gameObject);
+      Destroy(Instantiate(deathEffect, transform.position, Quaternion.identity) as GameObject, 2);
    }
 
    private System.Collections.IEnumerator StartAttackCooldown()

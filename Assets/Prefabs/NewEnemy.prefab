@@ -172,6 +172,8 @@ MonoBehaviour:
   attackRange: 1.5
   playerInSightRange: 0
   playerInAttackRange: 0
+  deathEffect: {fileID: 4486101655351129312, guid: 0a2f3ebc8b825124e8066fcef50c17ef, type: 3}
+  deathParticles: {fileID: 2230488035642009543, guid: 0a2f3ebc8b825124e8066fcef50c17ef, type: 3}
 --- !u!64 &6224313090966120509
 MeshCollider:
   m_ObjectHideFlags: 0
