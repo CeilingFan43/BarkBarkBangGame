@@ -3,7 +3,22 @@ guid: bb6aa2eeb3c684a4ea1da0b36eaddd52
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TempSnowTexture
+    second: {fileID: 2100000, guid: 86dd5c8305881064da7052c51a6723c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeBase
+    second: {fileID: 2100000, guid: e373036033cc0494781a0e2223e3a225, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeLeaves
+    second: {fileID: 2100000, guid: 5eaa44946813353409d93ab74b88ecdc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
