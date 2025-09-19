@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerAttack : MonoBehaviour
 {
@@ -11,40 +12,100 @@ public class playerAttack : MonoBehaviour
     public Transform attackOrigin;
     public LayerMask enemyLayer;
 
+    //Charge Attack stuff
+    public float maxChargeTime = 2f;
+    public float maxDamageMultiplier = 2f;
+    public GameObject chargeUI;
+    public Image chargeFillBar;
+
+    private bool isCharging = false;
+    private float chargeTime = 0f;
+    private bool canAttack = true;
+
     Animator myAnimator;
     // Start is called before the first frame update
     void Start()
     {
         myAnimator = GetComponent<Animator>();
+        if (chargeUI != null)
+        chargeUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        if (Input.GetMouseButtonDown(0) && canAttack)
         {
-            Attack();
+            StartCharging();
+        }
+
+        if (Input.GetMouseButton(0) && isCharging)
+        {
+            Charge();
+        }
+
+        if (Input.GetMouseButtonUp(0) && isCharging)
+        {
+            ReleaseAttack();
         }
     }
 
-//attack code, checks for enemies tagged Enemy in sphere, calls the TakeDamage function on the enemies.
-    void Attack()
+    private void StartCharging()
     {
+        isCharging = true;
+        chargeTime = 0f;
+
+        if (chargeUI != null)
+            chargeUI.SetActive(true);
+
+        if (chargeFillBar != null)
+            chargeFillBar.fillAmount = 0f;
+
+    }
+
+    private void Charge()
+    {
+        chargeTime += Time.deltaTime;
+        float chargePercent = Mathf.Clamp01(chargeTime / maxChargeTime);
+
+        if (chargeFillBar != null)
+        {
+            chargeFillBar.fillAmount = chargePercent; 
+        }
+    }
+
+
+//attack code, checks for enemies tagged Enemy in sphere, calls the TakeDamage function on the enemies.
+    void ReleaseAttack()
+    {
+        isCharging = false;
+        if (chargeUI != null)
+        {
+            chargeUI.SetActive(false);
+        }
+
+        //damage calc
+        float chargePercent = Mathf.Clamp01(chargeTime / maxChargeTime);
+        float finalDamage = damage * Mathf.Lerp(1f, maxDamageMultiplier, chargePercent);
+
         myAnimator.SetBool("attacked", true);
+
         Collider[] hitEnemies = Physics.OverlapSphere(attackOrigin.position, attackRadius, enemyLayer);
 
         foreach (Collider enemy in hitEnemies)
         {
             if (enemy.CompareTag("Enemy"))
             {
-                enemy.GetComponent<newEnemyAi>().TakeDamage(damage);
+                enemy.GetComponent<newEnemyAi>().TakeDamage(finalDamage);
             }
 
             if (enemy.CompareTag("EnemySpawner"))
             {
-                enemy.GetComponentInParent<EnemySpawner>().TakeDamage(damage);
+                enemy.GetComponentInParent<EnemySpawner>().TakeDamage(finalDamage);
             }
         }
+
+        Debug.Log("Charge attack completed. Damage;"+ finalDamage + " || Charged for " + chargeTime + "seconds");
 
         StartCoroutine(AttackCooldown());
     }
@@ -59,7 +120,9 @@ public class playerAttack : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
+        canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
         myAnimator.SetBool("attacked", false);
         Debug.Log("attack cooldown method called");
     }

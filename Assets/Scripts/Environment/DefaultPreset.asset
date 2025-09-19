@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmbientColour:
     serializedVersion: 2
-    key0: {r: 0.22327036, g: 0.5088817, b: 1, a: 1}
+    key0: {r: 0, g: 0.36868715, b: 1, a: 1}
     key1: {r: 0.9150691, g: 0.9296038, b: 0.9545246, a: 1}
     key2: {r: 0.9408449, g: 0.9452795, b: 0.9528302, a: 1}
     key3: {r: 0.22352943, g: 0.50980395, b: 1, a: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   DirectionalColor:
     serializedVersion: 2
-    key0: {r: 0, g: 0, b: 0, a: 1}
+    key0: {r: 1, g: 0, b: 0, a: 1}
     key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}

@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class NoteScript : MonoBehaviour
 {
-    public GameObject noteUI;         // Assigned in Inspector
-    public GameObject buttonPrompt;   // Assigned in Inspector
+    public GameObject noteUI;        
+    public GameObject buttonPrompt;   
+    public Sprite[] notes; 
+    public Image note;
+    public Button nextButton;
+    public Button backButton;
 
+    private int currentPage = 0;
     private bool playerInRange = false;
 
     private void OnTriggerEnter(Collider other)
@@ -53,6 +58,10 @@ public class NoteScript : MonoBehaviour
             {
                 noteUI.SetActive(true);
                 buttonPrompt.SetActive(false);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                currentPage = 0;
+                ShowPage(currentPage);
             }
             else
             {
@@ -66,6 +75,8 @@ public class NoteScript : MonoBehaviour
             {
                 noteUI.SetActive(false);
                 buttonPrompt.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
             else
             {
@@ -73,4 +84,31 @@ public class NoteScript : MonoBehaviour
             }
         }
     }
+
+    public void PageFlipForward()
+    {
+        if (currentPage < notes.Length - 1)
+        {
+            currentPage++;
+            ShowPage(currentPage);
+        }
+    }
+
+
+    public void PageFlipBackward()
+    {
+        if (currentPage > 0)
+        {
+            currentPage--;
+            ShowPage(currentPage);
+        }
+    }
+
+ private void ShowPage(int pageIndex)
+    {
+        note.sprite = notes[pageIndex];
+        backButton.interactable = (pageIndex > 0);
+        nextButton.interactable = (pageIndex < notes.Length - 1);
+    }
+
 }

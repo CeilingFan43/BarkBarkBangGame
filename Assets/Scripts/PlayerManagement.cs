@@ -79,15 +79,10 @@ public class PlayerManagement : MonoBehaviour
         CheckHealth();
     }
 
-    public void BatteryPickup(float amount)
+    public void BatteryRefill()
     {
-        currentBattery += amount;
-        Debug.Log(currentBattery);
-
-        if (currentBattery>1000)
-        {
-            currentBattery = 1000;
-        }
+        currentBattery = maxBattery;
+        Debug.Log("Battery Refilled");
     }
 
     public void CheckHealth()

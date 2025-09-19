@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+
+
 public class batteryPickup : MonoBehaviour
 {
     public float batteryAmount = 200f;
@@ -40,3 +43,6 @@ public class batteryPickup : MonoBehaviour
         }
     }
 }
+
+
+*/

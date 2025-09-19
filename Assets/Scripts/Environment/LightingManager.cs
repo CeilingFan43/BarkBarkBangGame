@@ -6,6 +6,7 @@ using UnityEngine;
 public class LightingManager : MonoBehaviour
 {
     [SerializeField] private Light DirectionalLight;
+    [SerializeField] private Light DirectionalLightMoon;
     [SerializeField] private LightingConditions Preset;
     [SerializeField, Range(0, 24)] private float TimeOfDay;
     public gameManager gameManager;
@@ -24,7 +25,7 @@ public class LightingManager : MonoBehaviour
         }
         else
         {
-            UpdateLighting(TimeOfDay / 24f);
+            UpdateLighting(TimeOfDay / gameManager.maxTime);
         }
     }
 
