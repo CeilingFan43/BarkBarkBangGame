@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 387456905195902991, guid: 7fae5d20abba1f24d9094504b410641d, type: 3}
       propertyPath: m_Name
-      value: PineTree 2
+      value: PineTree 2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 760389942982058061, guid: 7fae5d20abba1f24d9094504b410641d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 760389942982058061, guid: 7fae5d20abba1f24d9094504b410641d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56,6 +56,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3727552762091035425, guid: 7fae5d20abba1f24d9094504b410641d, type: 3}
+      propertyPath: m_Height
+      value: 5.62
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1410149907218359528, guid: 7fae5d20abba1f24d9094504b410641d, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fae5d20abba1f24d9094504b410641d, type: 3}

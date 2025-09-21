@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3614323712109002870}
   - component: {fileID: 3277618855640554916}
+  - component: {fileID: 6572009093363553666}
   m_Layer: 3
   m_Name: WeepingWillowTreeModel (1)
   m_TagString: Untagged
@@ -234,6 +235,20 @@ LODGroup:
     - renderer: {fileID: 415281063386752623}
     - renderer: {fileID: 8550814441732089415}
   m_Enabled: 1
+--- !u!136 &6572009093363553666
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135281824328260300}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.16
+  m_Height: 4.25
+  m_Direction: 1
+  m_Center: {x: -0.27, y: 0.75, z: -0.33}
 --- !u!1 &4572258753217610297
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +260,6 @@ GameObject:
   - component: {fileID: 2022988849181610290}
   - component: {fileID: 6888180138948505987}
   - component: {fileID: 2757640589930296589}
-  - component: {fileID: 6694667746269894947}
   m_Layer: 3
   m_Name: WeepingWillowTreeBase
   m_TagString: Untagged
@@ -318,17 +332,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6694667746269894947
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4572258753217610297}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3900871681912502981, guid: 8c4d90e393127574a99bf29289962f57, type: 3}

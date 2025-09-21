@@ -69,7 +69,7 @@ public class NoteScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (playerInRange && Input.GetKeyDown(KeyCode.Space))
         {
             if (noteUI != null)
             {

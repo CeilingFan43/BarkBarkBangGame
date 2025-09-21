@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 760389942982058061}
   - component: {fileID: 2959675960608117434}
+  - component: {fileID: 3727552762091035425}
   m_Layer: 3
   m_Name: PineTree
   m_TagString: Untagged
@@ -60,6 +61,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7054108309716668112}
   m_Enabled: 1
+--- !u!136 &3727552762091035425
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387456905195902991}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.72
+  m_Height: 5.74
+  m_Direction: 1
+  m_Center: {x: -0.24, y: -0.31, z: -0.3}
 --- !u!1 &6586634905474854862
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +117,6 @@ GameObject:
   - component: {fileID: 8191510054757004735}
   - component: {fileID: 5044538920530606618}
   - component: {fileID: 7054108309716668112}
-  - component: {fileID: 2239452689125397578}
   m_Layer: 3
   m_Name: PinetreeModel
   m_TagString: Untagged
@@ -244,17 +258,3 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b32794b358952904eaa7665adb8bf1bd, type: 3}
---- !u!64 &2239452689125397578
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8855702298075377413}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1080578274599223743, guid: a68a0ad7275f21549a3b45aa3a624aed, type: 3}
