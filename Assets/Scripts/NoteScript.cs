@@ -37,10 +37,13 @@ public class NoteScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             if (buttonPrompt != null)
             {
                 buttonPrompt.SetActive(false);
+                
             }
 
             if (noteUI != null)

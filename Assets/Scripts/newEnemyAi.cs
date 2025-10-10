@@ -125,6 +125,13 @@ private void Update()
       {
          PlayerManagement pm = player.GetComponent<PlayerManagement>();
          if (pm != null)
+         /*
+            DECLAN - In here have it roll between 0 to 1 whent eh enemy is x units away from player.
+            if it hits 0.3 or below, call a separate lunch attack function that will launch the 
+            enemy with momentum at the player off the ground slightly after first freezing for a second to 
+            prepare for the lunge :).
+
+         */
          {
             Debug.Log($"{gameObject.name} attacked {player.name}");
             pm.PlayerTakeDamage(damage);

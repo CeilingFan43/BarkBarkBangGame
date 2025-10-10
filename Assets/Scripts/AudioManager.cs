@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource soundSource;
     // Start is called before the first frame update
     public AudioClip ChaseMusic;
+    public AudioClip GameStartSound;
     private int enemiesChasing = 0;
     private bool isChaseMusicPlaying = false;
     void Start()
@@ -46,5 +47,11 @@ public void EndChase()
     {
         Debug.Log("ENEMIES CHASING: " + enemiesChasing + " enemies still chasing.");
     }
+}
+
+public void StartSound()
+{
+    soundSource.clip = GameStartSound;
+    soundSource.Play();
 }
 }

@@ -37,10 +37,19 @@ public class LightingManager : MonoBehaviour
         if (DirectionalLight != null)
         {
             DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
-            DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f ) - 90f, 170, 0));
 
-            //NOTE FOR DECLAN!!!
-            //Alter rotation so it works from under the map to a fixed sunrise position. Then make it so that the rotation doesn't happen until x% of the timer is completed 
+            if (timePercent >= 0.8f)
+            {
+                float sunriseProgress = Mathf.InverseLerp(0.8f, 1f, timePercent);
+
+                DirectionalLight.transform.localRotation =
+                Quaternion.Euler(new Vector3((sunriseProgress * 90f) - 90f, 170, 0));
+            }
+            else
+            {
+                DirectionalLight.transform.localRotation =
+                Quaternion.Euler(new Vector3(-90f, 170, 0));
+            }
         }
     } 
 

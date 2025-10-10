@@ -15,6 +15,8 @@ public class PlayerManagement : MonoBehaviour
 
     //Flashlight
     public Light flashlight;
+    public Light spotlight;
+    public Light faceLight;
 
     public GameObject playerFull;
     public GameObject playerHalf;
@@ -44,6 +46,8 @@ public class PlayerManagement : MonoBehaviour
         if(Input.GetKeyDown("f"))
         {
             flashlight.enabled = !flashlight.enabled;
+            spotlight.enabled = !spotlight.enabled;
+            faceLight.enabled = !faceLight.enabled;
             //flashOn = !flashOn;
         }
 
@@ -55,12 +59,12 @@ public class PlayerManagement : MonoBehaviour
         if (flashlight.enabled == true && currentBattery <= 0)
         {
             flashlight.enabled = false;
+            spotlight.enabled = false;
+            faceLight.enabled = false;
         }
 
         battery.fillAmount = currentBattery / maxBattery;
         health.fillAmount = currentHealth / maxHealth;
-
-
     }
 
 

@@ -143,12 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4855ce2c2e3a5a499fd5297bbabbb36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
+  health: 100
   wolfPrefab: {fileID: 4430974008255123586, guid: 7e7841f6bec52854ea31fd71ea59b418, type: 3}
-  initialSpawnRate: 6
+  initialSpawnRate: 2
   spawnRateIncreaseInterval: 60
   spawnRateIncreaseAmount: 2
-  maxSpawnRate: 15
+  maxSpawnRate: 8
   spawnRadius: 7.44
 --- !u!1 &2029295942679406999
 GameObject:
