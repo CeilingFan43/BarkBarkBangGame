@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class playerAttack : MonoBehaviour
 {
+    private PlayerManagement pm;
     public float attackRange;
     public float attackRadius;
     public float damage;
@@ -26,6 +27,7 @@ public class playerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pm = FindObjectOfType<PlayerManagement>();
         myAnimator = GetComponent<Animator>();
         if (chargeUI != null)
         chargeUI.SetActive(false);
@@ -88,7 +90,8 @@ public class playerAttack : MonoBehaviour
         float chargePercent = Mathf.Clamp01(chargeTime / maxChargeTime);
         float finalDamage = damage * Mathf.Lerp(1f, maxDamageMultiplier, chargePercent);
 
-        myAnimator.SetBool("attacked", true);
+        myAnimator.SetBool("PlayerAttacked", true);
+        // ADD IN A SCALE FACTOR TO ANIMATION TIME FOR CHARGE ATTACK !. MAYBE ADD A SEPARATE CHARGE ANIM TO CHARGING.
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackOrigin.position, attackRadius, enemyLayer);
 
@@ -96,7 +99,12 @@ public class playerAttack : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy"))
             {
-                enemy.GetComponent<newEnemyAi>().TakeDamage(finalDamage);
+                enemy.GetComponent<TallWolfAI>().TakeDamage(finalDamage);
+            }
+
+            else if (enemy.CompareTag("Enemy"))
+            {
+                enemy.GetComponent<SmallWolfAI>().TakeDamage(finalDamage);
             }
 
             if (enemy.CompareTag("EnemySpawner"))
@@ -120,6 +128,7 @@ public class playerAttack : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
+        myAnimator.SetBool("PlayerAttacked", false);
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;

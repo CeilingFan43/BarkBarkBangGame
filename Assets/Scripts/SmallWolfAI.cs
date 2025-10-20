@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class newEnemyAi : MonoBehaviour
+public class SmallWolfAI : MonoBehaviour
 {
    AudioManager audioManager;
    //private bool playerPreviouslyDetected = false;
    private bool isChasing = false;
 
+   private Animator enemyAnimator;
+
    //Enmemy values
    public float health;
    public float damage = 10f;
    public float attackCooldown = 2f;
+
+   //Pounce attack stuff
+   public float pounceRange;
+   private bool isPouncing = false;
+   private bool hasPounced = false;
+   private bool canAttemptPounce = true;
+   public float pounceForce;
+
+   private Rigidbody wolfRb;
+
+
    private bool canAttack = true;
+
 
    public NavMeshAgent agent;
    public Transform player;
@@ -26,7 +40,7 @@ public class newEnemyAi : MonoBehaviour
    public float walkPointRange;
 
    public float sightRange, attackRange;
-   public bool playerInSightRange, playerInAttackRange;
+   public bool playerInSightRange, playerInAttackRange, inPounceRange;
 
    public GameObject deathEffect;
    public ParticleSystem deathParticles;
@@ -38,6 +52,8 @@ public class newEnemyAi : MonoBehaviour
 		player = GameObject.Find("Player").transform;
 		agent = GetComponent<NavMeshAgent>();
       pm = FindObjectOfType<PlayerManagement>();
+      enemyAnimator = GetComponent<Animator>();
+      wolfRb = GetComponent<Rigidbody>();
       
    }
 
@@ -46,6 +62,7 @@ private void Update()
    //Sphere check for player in range
     playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
     playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
+    inPounceRange = Physics.CheckSphere(transform.position, pounceRange, Player);
 
    bool playerDetected = playerInSightRange || playerInAttackRange;
 
@@ -65,10 +82,22 @@ private void Update()
             audioManager.StartChase();
             isChasing = true;
         }
+      
+        if (isPouncing)
+        {
+            return;
+        }
+
+        if (inPounceRange && !playerInAttackRange && !hasPounced && canAttemptPounce)
+        {
+            PounceAttempt();
+        }
+
         if (playerInSightRange && !playerInAttackRange)
         {
             ChasePlayer();
         }
+
         else if (playerInSightRange && playerInAttackRange)
         {
             AttackPlayer();
@@ -78,6 +107,8 @@ private void Update()
 
    private void Patroling()
    {
+      enemyAnimator.SetTrigger("TallWalking");
+
 		if (!walkPointSet) SearchWalkPoint();
 
 		if (walkPointSet)
@@ -110,29 +141,87 @@ private void Update()
 			walkPointSet = true;
    }
 
+   private void PounceAttempt()
+   {
+      canAttemptPounce = false;
+
+      if(canAttack)
+      {
+        float chance = Random.Range(0f, 1f);
+        if (chance <= 0.3f)
+        {
+            hasPounced = true;
+            StartCoroutine(PounceAttack());
+        }
+        else
+        {
+            StartCoroutine(PounceAttemptDelay(1f));
+            ChasePlayer();
+        }
+      }
+   }
+
+   private IEnumerator PounceAttemptDelay(float delay)
+   {
+    yield return new WaitForSeconds(delay);
+    canAttemptPounce = true;
+   }  
+
+   private IEnumerator PounceAttack()
+   {
+      isPouncing = true;
+      canAttack = false;
+      agent.isStopped = true;
+      agent.enabled = false;
+      wolfRb.isKinematic = false;
+      //When animation is done, add pounce prep animation
+
+      //if wanting a delayed attack, swap the next two lines so that it jumps to an older position.
+      yield return new WaitForSeconds(1f);
+      Vector3 direction = (player.position - transform.position).normalized;
+      float upForce = 5f;
+      
+      Vector3 lookDirection = direction;
+      lookDirection.y = 0;
+      if (lookDirection != Vector3.zero)
+      {
+        transform.rotation = Quaternion.LookRotation(lookDirection);
+      }
+
+      wolfRb.AddForce(direction * pounceForce + Vector3.up * upForce, ForceMode.VelocityChange);
+      yield return new WaitForSeconds(0.5f);
+
+      wolfRb.velocity = Vector3.zero;
+      wolfRb.isKinematic = true;
+      agent.enabled = true;
+      agent.isStopped = false;
+
+      if (playerInSightRange && playerInAttackRange)
+      {
+         AttackPlayer();
+      }
+
+      isPouncing = false;
+   }
+
    private void ChasePlayer()
    {
+      enemyAnimator.SetTrigger("TallRunning");
 		agent.SetDestination(player.position);
    }
 
    private void AttackPlayer()
    {
 		agent.SetDestination(transform.position);
-		transform.LookAt(player);
+		//transform.LookAt(player);
 
       // Attack the player if possible
       if (canAttack)
       {
          PlayerManagement pm = player.GetComponent<PlayerManagement>();
          if (pm != null)
-         /*
-            DECLAN - In here have it roll between 0 to 1 whent eh enemy is x units away from player.
-            if it hits 0.3 or below, call a separate lunch attack function that will launch the 
-            enemy with momentum at the player off the ground slightly after first freezing for a second to 
-            prepare for the lunge :).
-
-         */
          {
+            enemyAnimator.SetTrigger("TallAttack");
             Debug.Log($"{gameObject.name} attacked {player.name}");
             pm.PlayerTakeDamage(damage);
             StartCoroutine(StartAttackCooldown());
@@ -141,12 +230,16 @@ private void Update()
 
    }
 
+
+
    private void OnDrawGizmosSelected()
    {
-		  Gizmos.color = Color.red;
-		  Gizmos.DrawWireSphere(transform.position, attackRange);
-		  Gizmos.color = Color.yellow;
-		  Gizmos.DrawWireSphere(transform.position, sightRange);
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(transform.position, attackRange);
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere(transform.position, sightRange);
+      Gizmos.color = Color.green;
+		Gizmos.DrawWireSphere(transform.position, pounceRange);
    }
 
    // Enemy Damage / Attack Functions
