@@ -107,7 +107,7 @@ private void Update()
 
    private void Patroling()
    {
-      enemyAnimator.SetTrigger("TallWalking");
+      //enemyAnimator.SetBool("SmallWalking");
 
 		if (!walkPointSet) SearchWalkPoint();
 
@@ -202,18 +202,19 @@ private void Update()
       }
 
       isPouncing = false;
+      canAttack = true;
    }
 
    private void ChasePlayer()
    {
-      enemyAnimator.SetTrigger("TallRunning");
+      //enemyAnimator.SetBool("SmallRunning");
 		agent.SetDestination(player.position);
    }
 
    private void AttackPlayer()
    {
 		agent.SetDestination(transform.position);
-		//transform.LookAt(player);
+		transform.LookAt(player);
 
       // Attack the player if possible
       if (canAttack)
@@ -221,7 +222,7 @@ private void Update()
          PlayerManagement pm = player.GetComponent<PlayerManagement>();
          if (pm != null)
          {
-            enemyAnimator.SetTrigger("TallAttack");
+            //enemyAnimator.SetBool("SmallAttack");
             Debug.Log($"{gameObject.name} attacked {player.name}");
             pm.PlayerTakeDamage(damage);
             StartCoroutine(StartAttackCooldown());

@@ -130,7 +130,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4430974008255123586}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 1.86
+  m_Radius: 1.5
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
@@ -186,7 +186,7 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 20
   sightRange: 30
-  attackRange: 1.5
+  attackRange: 1.86
   playerInSightRange: 0
   playerInAttackRange: 0
   inPounceRange: 0

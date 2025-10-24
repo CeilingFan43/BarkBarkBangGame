@@ -99,13 +99,15 @@ public class playerAttack : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy"))
             {
-                enemy.GetComponent<TallWolfAI>().TakeDamage(finalDamage);
+                TallWolfAI tallWolf = enemy.GetComponent<TallWolfAI>();
+                SmallWolfAI smallWolf = enemy.GetComponent<SmallWolfAI>();
+
+                if (tallWolf != null)
+                    tallWolf.TakeDamage(finalDamage);
+                else if (smallWolf != null)
+                    smallWolf.TakeDamage(finalDamage);
             }
 
-            else if (enemy.CompareTag("Enemy"))
-            {
-                enemy.GetComponent<SmallWolfAI>().TakeDamage(finalDamage);
-            }
 
             if (enemy.CompareTag("EnemySpawner"))
             {
