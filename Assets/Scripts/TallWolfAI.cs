@@ -12,9 +12,9 @@ public class TallWolfAI : MonoBehaviour
    private Animator enemyAnimator;
 
    //Animator bools
-   private bool isWalking = false;
-   private bool isRunning = false;
-   private bool isAttacking = false;
+   //private bool isWalking = false;
+   //private bool isRunning = false;
+   //private bool isAttacking = false;
 
    //Enmemy values
    public float health;

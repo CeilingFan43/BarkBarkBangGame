@@ -13,14 +13,19 @@ public class gameManager : MonoBehaviour
     public GameObject deathScreenUI; 
     public GameObject timesUpUI; 
 
+    public GameObject screen1;
+    public GameObject screen2;
+    public GameObject screen3;
+    public GameObject buttonsScreen;
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1f;
-        deathScreenUI.SetActive(false);
-        timesUpUI.SetActive(false);
-        currentTime = maxTime;
-
+        StartGame();
     }
 
     // Update is called once per frame
@@ -41,7 +46,8 @@ public class gameManager : MonoBehaviour
     public void PlayerDied()
     {
         Time.timeScale = 0f; // Optional: freeze time
-        deathScreenUI.SetActive(true);
+        //deathScreenUI.SetActive(true);
+        StartCoroutine(GameEnd());
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -62,4 +68,40 @@ public class gameManager : MonoBehaviour
         SceneManager.LoadScene(currentScene.name);
     }
 
+    public IEnumerator GameEnd()
+    {
+        deathScreenUI.SetActive(true);
+
+        //Screen 1
+        screen1.SetActive(true);
+        screen2.SetActive(false);
+        screen3.SetActive(false);
+        buttonsScreen.SetActive(false);
+        yield return new WaitForSecondsRealtime(4f);
+
+        //screen 2
+        screen1.SetActive(false);
+        screen2.SetActive(true);
+        yield return new WaitForSecondsRealtime(5f);
+
+        //screenn 3
+        screen2.SetActive(false);
+        screen3.SetActive(true);
+        yield return new WaitForSecondsRealtime(4f);
+
+        //bring up buttons
+        buttonsScreen.SetActive(true);
+
+
+        yield break;
+
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        //
+        //timesUpUI.SetActive(false);
+        currentTime = maxTime;
+    }
 }

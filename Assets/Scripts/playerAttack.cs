@@ -23,12 +23,11 @@ public class playerAttack : MonoBehaviour
     private float chargeTime = 0f;
     private bool canAttack = true;
 
-    Animator myAnimator;
+    public Animator playerAnimator;
     // Start is called before the first frame update
     void Start()
     {
         pm = FindObjectOfType<PlayerManagement>();
-        myAnimator = GetComponent<Animator>();
         if (chargeUI != null)
         chargeUI.SetActive(false);
     }
@@ -48,6 +47,7 @@ public class playerAttack : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && isCharging)
         {
+
             ReleaseAttack();
         }
     }
@@ -90,7 +90,7 @@ public class playerAttack : MonoBehaviour
         float chargePercent = Mathf.Clamp01(chargeTime / maxChargeTime);
         float finalDamage = damage * Mathf.Lerp(1f, maxDamageMultiplier, chargePercent);
 
-        myAnimator.SetBool("PlayerAttacked", true);
+        playerAnimator.SetTrigger("PlayerAttack");
         // ADD IN A SCALE FACTOR TO ANIMATION TIME FOR CHARGE ATTACK !. MAYBE ADD A SEPARATE CHARGE ANIM TO CHARGING.
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackOrigin.position, attackRadius, enemyLayer);
@@ -130,11 +130,10 @@ public class playerAttack : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
-        myAnimator.SetBool("PlayerAttacked", false);
+        playerAnimator.SetBool("PlayerAttacked", false);
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
-        myAnimator.SetBool("attacked", false);
         Debug.Log("attack cooldown method called");
     }
 }

@@ -24,6 +24,7 @@ public class newPlayerMovement : MonoBehaviour
     public Image stamina;
     private CharacterController player;
     public Transform playerOrientation;
+    public Animator playerAnimator;
 
 
 
@@ -43,7 +44,7 @@ public class newPlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown("left shift"))
         {
-            running = true;
+            running = true;     
         }
         else if (Input.GetKeyUp("left shift"))
         {
@@ -86,6 +87,30 @@ public class newPlayerMovement : MonoBehaviour
                 currentStamina = 100;
             }
             stamina.fillAmount = currentStamina / maxStamina;
+        }
+
+        //Animations
+        bool isMoving = player.velocity.magnitude > 0.1f;
+
+        if (isMoving)
+        {
+            if (running)
+            {
+                playerAnimator.SetBool("PlayerRunning", true);
+                playerAnimator.SetBool("PlayerWalking", false);
+            }
+
+            else
+            {
+                playerAnimator.SetBool("PlayerWalking", true);
+                playerAnimator.SetBool("PlayerRunning", false);
+            }
+        }
+
+        else
+        {
+            playerAnimator.SetBool("PlayerWalking", false);
+            playerAnimator.SetBool("PlayerRunning", false);
         }
 
     }

@@ -22,6 +22,11 @@ public class playerMovement : MonoBehaviour
     public Transform playerOrientation;
     private Vector3 moveDirection;
 
+    //Animations
+    public Animator playerAnimator;
+    private bool PlayerWalking = false;
+    private bool PlayerRunning = false;
+
     void Start()
     {
         player = GetComponent<CharacterController>();
@@ -35,10 +40,14 @@ public class playerMovement : MonoBehaviour
         if (Input.GetKeyDown("left shift"))
         {
             running = true;
+            playerAnimator.SetBool("PlayerRunning", true);
+            
         }
         else if (Input.GetKeyUp("left shift"))
         {
             running = false;
+            playerAnimator.SetBool("PlayerRunning", false);
+            
         }
 
         Vector3 forward = playerOrientation.forward;
@@ -52,6 +61,16 @@ public class playerMovement : MonoBehaviour
         moveDirection = (forward * vertical + right * horizontal).normalized;
         playerOrientation.forward = moveDirection;
 
+
+        if(player.velocity.magnitude > 0.1f && running == false)
+        {
+            playerAnimator.SetBool("PlayerWalking", true);
+        }
+
+        else
+        {
+            playerAnimator.SetBool("PlayerWalking", false);
+        }
 
         if (!player.isGrounded)
         {
@@ -72,6 +91,7 @@ public class playerMovement : MonoBehaviour
             {
                 currentStamina = 0;
                 running = false;
+                PlayerRunning = false;
             }
             stamina.fillAmount = currentStamina / maxStamina;
         }

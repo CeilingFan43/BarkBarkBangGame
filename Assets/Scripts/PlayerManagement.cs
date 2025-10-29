@@ -13,14 +13,16 @@ public class PlayerManagement : MonoBehaviour
     public float batteryDrain;
     private gameManager gameManager;
 
+    //Animations
+    public Animator playerAnimator;
+
     //Flashlight
     public Light flashlight;
     public Light spotlight;
     public Light faceLight;
 
-    public GameObject playerFull;
     public GameObject playerHalf;
-    public GameObject playerDead;
+    public GameObject playerLow;
 
     public Image health;
     public Image battery;
@@ -91,23 +93,28 @@ public class PlayerManagement : MonoBehaviour
 
     public void CheckHealth()
     {
-        if(currentHealth <= 0)
+        if(0 < currentHealth && currentHealth < 25)
         {
-            playerHalf.SetActive(false);
-            playerDead.SetActive(true);
-            gameManager.PlayerDied();
+            playerLow.SetActive(true);
+            
         }
 
         else if(0 < currentHealth && currentHealth < 50)
         {
-            playerFull.SetActive(false);
             playerHalf.SetActive(true);
             
         }
+
+        else if(currentHealth <= 0)
+        {
+            gameManager.PlayerDied();
+            
+        }
+
         else
         {
-            playerFull.SetActive(true);
             playerHalf.SetActive(false);
+            playerLow.SetActive(false);
         }
     }
 
