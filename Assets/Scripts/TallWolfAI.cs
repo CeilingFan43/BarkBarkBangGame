@@ -175,7 +175,7 @@ private void Update()
 
    IEnumerator Die()
    {
-      audioManager.EndChase();
+      audioManager.StartCoroutine(audioManager.EndChase());
       agent.enabled=false;
       aliveWolf.SetActive(false);
       deadWolf.SetActive(true);

@@ -266,8 +266,7 @@ private void Update()
 
    IEnumerator Die()
    {
-      Debug.Log($"{gameObject.name} died.");
-      audioManager.EndChase();
+      audioManager.StartCoroutine(audioManager.EndChase());
       agent.enabled=false;
       aliveWolf.SetActive(false);
       deadWolf.SetActive(true);

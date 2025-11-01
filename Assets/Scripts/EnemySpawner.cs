@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public float health = 150f;
 
     public GameObject wolfPrefab;
+    public GameObject quadWolfPrefab;
     public float initialSpawnRate = 6f;
     public float spawnRateIncreaseInterval = 60f;
     public float spawnRateIncreaseAmount = 2f;
@@ -15,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
     private float timeElapsed = 0f;
     private float currentSpawnRate;
     private float nextSpawnTime;
+
+     public float tallWolfSpawnChance = 0.7f;
 
     // To track when the spawn rate was last increased
     private float lastIncreaseTime = 0f; 
@@ -49,8 +52,22 @@ public class EnemySpawner : MonoBehaviour
     //Wolf spawning 
     void SpawnWolf()
     {
+        float roll = Random.value;
+
         Vector3 randomSpawnPosition = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
-        Instantiate(wolfPrefab, randomSpawnPosition, Quaternion.identity);
+
+        if (roll < tallWolfSpawnChance)
+        {
+            // Spawn normal wolf
+            Instantiate(wolfPrefab, randomSpawnPosition, Quaternion.identity);
+
+        }
+        else
+        {
+            // Spawn quad wolf
+            Instantiate(quadWolfPrefab, randomSpawnPosition, Quaternion.identity);
+
+        }
     }
 
     void SetNextSpawnTime()

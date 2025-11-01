@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public GameObject instructionsScreen;
+    public GameObject creditsScreen;
+    public AudioManager audioManager;
     
+
+
+
+public void InstructionsScreen()
+{
+    instructionsScreen.SetActive(!instructionsScreen.activeSelf);
+}
+
+public void creditsScreenTurnOn()
+{
+    creditsScreen.SetActive(!creditsScreen.activeSelf);
+}
 }

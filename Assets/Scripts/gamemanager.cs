@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     private bool gameEnded = false;
 
+    public AudioManager audioManager;
+
     
 
 
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator GameWin()
     {
         timesUpUI.SetActive(true);
+        audioManager.EndMusic();
 
         //Screen 1
         screen1.SetActive(true);
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
         //
         //timesUpUI.SetActive(false);
         currentTime = maxTime;
+        audioManager.StartMusic();
     }
 
     public void Pause()

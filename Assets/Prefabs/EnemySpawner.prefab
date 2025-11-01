@@ -144,11 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  wolfPrefab: {fileID: 4430974008255123586, guid: 7e7841f6bec52854ea31fd71ea59b418, type: 3}
+  wolfPrefab: {fileID: 4430974008255123586, guid: ca6658560159340409e96f5331871a2b, type: 3}
+  quadWolfPrefab: {fileID: 4430974008255123586, guid: 7e7841f6bec52854ea31fd71ea59b418, type: 3}
   initialSpawnRate: 2
   spawnRateIncreaseInterval: 60
   spawnRateIncreaseAmount: 2
   maxSpawnRate: 8
+  tallWolfSpawnChance: 0.7
   spawnRadius: 7.44
 --- !u!1 &2029295942679406999
 GameObject:
