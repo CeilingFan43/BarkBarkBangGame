@@ -11,7 +11,7 @@ public class PlayerManagement : MonoBehaviour
     public float maxBattery = 1000;
     private float currentBattery;
     public float batteryDrain;
-    private gameManager gameManager;
+    private GameManager gameManager;
 
     //Animations
     public Animator playerAnimator;
@@ -30,14 +30,21 @@ public class PlayerManagement : MonoBehaviour
     public GameObject player;
 
 
+    //UI Health Layers
+    public GameObject fullHealthUI;
+    public GameObject halfHealthUI;
+    public GameObject lowHealthUI;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<gameManager>();
+        gameManager = FindObjectOfType<GameManager>();
         currentHealth = maxHealth;
         currentBattery = maxBattery;   
         player = GameObject.Find("Player");
         CheckHealth();
+        fullHealthUI.SetActive(true);
 
 
 
@@ -45,6 +52,14 @@ public class PlayerManagement : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+        gameManager.Pause();
+        }
+
+
+
         if(Input.GetKeyDown("f"))
         {
             flashlight.enabled = !flashlight.enabled;
@@ -96,12 +111,16 @@ public class PlayerManagement : MonoBehaviour
         if(0 < currentHealth && currentHealth < 25)
         {
             playerLow.SetActive(true);
+            lowHealthUI.SetActive(true);
+            halfHealthUI.SetActive(false);
             
         }
 
         else if(0 < currentHealth && currentHealth < 50)
         {
             playerHalf.SetActive(true);
+            fullHealthUI.SetActive(false);
+            halfHealthUI.SetActive(true);
             
         }
 
@@ -111,10 +130,11 @@ public class PlayerManagement : MonoBehaviour
             
         }
 
-        else
+        if(currentHealth >= 50)
         {
             playerHalf.SetActive(false);
             playerLow.SetActive(false);
+            fullHealthUI.SetActive(true);
         }
     }
 

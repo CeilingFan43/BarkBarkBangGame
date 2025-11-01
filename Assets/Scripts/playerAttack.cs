@@ -48,7 +48,7 @@ public class playerAttack : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && isCharging)
         {
 
-            ReleaseAttack();
+            StartCoroutine(ReleaseAttack());
         }
     }
 
@@ -78,7 +78,7 @@ public class playerAttack : MonoBehaviour
 
 
 //attack code, checks for enemies tagged Enemy in sphere, calls the TakeDamage function on the enemies.
-    void ReleaseAttack()
+    public IEnumerator ReleaseAttack()
     {
         isCharging = false;
         if (chargeUI != null)
@@ -92,6 +92,9 @@ public class playerAttack : MonoBehaviour
 
         playerAnimator.SetTrigger("PlayerAttack");
         // ADD IN A SCALE FACTOR TO ANIMATION TIME FOR CHARGE ATTACK !. MAYBE ADD A SEPARATE CHARGE ANIM TO CHARGING.
+
+        yield return new WaitForSeconds(0.8f);
+
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackOrigin.position, attackRadius, enemyLayer);
 
@@ -130,7 +133,7 @@ public class playerAttack : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
-        playerAnimator.SetBool("PlayerAttacked", false);
+        //playerAnimator.SetBool("PlayerAttacked", false);
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;

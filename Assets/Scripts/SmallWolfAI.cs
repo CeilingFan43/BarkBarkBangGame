@@ -25,6 +25,9 @@ public class SmallWolfAI : MonoBehaviour
 
    private Rigidbody wolfRb;
 
+   public GameObject aliveWolf;
+   public GameObject deadWolf;
+
 
    private bool canAttack = true;
 
@@ -107,7 +110,8 @@ private void Update()
 
    private void Patroling()
    {
-      //enemyAnimator.SetBool("SmallWalking");
+      enemyAnimator.SetBool("SmallRunning", false);
+      enemyAnimator.SetBool("SmallWalking", true);
 
 		if (!walkPointSet) SearchWalkPoint();
 
@@ -174,6 +178,9 @@ private void Update()
       agent.isStopped = true;
       agent.enabled = false;
       wolfRb.isKinematic = false;
+      enemyAnimator.SetBool("SmallWalking", false);
+      enemyAnimator.SetBool("SmallRunning", false);
+      
       //When animation is done, add pounce prep animation
 
       //if wanting a delayed attack, swap the next two lines so that it jumps to an older position.
@@ -195,6 +202,7 @@ private void Update()
       wolfRb.isKinematic = true;
       agent.enabled = true;
       agent.isStopped = false;
+      enemyAnimator.SetBool("SmallRunning", true);
 
       if (playerInSightRange && playerInAttackRange)
       {
@@ -207,14 +215,15 @@ private void Update()
 
    private void ChasePlayer()
    {
-      //enemyAnimator.SetBool("SmallRunning");
 		agent.SetDestination(player.position);
+      enemyAnimator.SetBool("SmallWalking", false);
+      enemyAnimator.SetBool("SmallRunning", true);
    }
 
    private void AttackPlayer()
    {
 		agent.SetDestination(transform.position);
-		transform.LookAt(player);
+		//transform.LookAt(player);
 
       // Attack the player if possible
       if (canAttack)
@@ -222,7 +231,7 @@ private void Update()
          PlayerManagement pm = player.GetComponent<PlayerManagement>();
          if (pm != null)
          {
-            //enemyAnimator.SetBool("SmallAttack");
+            enemyAnimator.SetTrigger("SmallAttack");
             Debug.Log($"{gameObject.name} attacked {player.name}");
             pm.PlayerTakeDamage(damage);
             StartCoroutine(StartAttackCooldown());
@@ -251,17 +260,22 @@ private void Update()
 
       if (health <= 0)
       {
-         Die();
+         StartCoroutine(Die());
       }
    }
 
-   void Die()
+   IEnumerator Die()
    {
       Debug.Log($"{gameObject.name} died.");
       audioManager.EndChase();
-      //playerPreviouslyDetected = false;
-      Destroy(gameObject);
+      agent.enabled=false;
+      aliveWolf.SetActive(false);
+      deadWolf.SetActive(true);
+
+
       Destroy(Instantiate(deathEffect, transform.position, Quaternion.identity) as GameObject, 2);
+      yield return new WaitForSeconds(4f);
+      Destroy(gameObject);
    }
 
    private System.Collections.IEnumerator StartAttackCooldown()

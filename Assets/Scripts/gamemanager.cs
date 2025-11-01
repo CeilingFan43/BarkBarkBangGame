@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class gameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public float maxTime = 240f;
     public float currentTime;    
@@ -18,6 +18,14 @@ public class gameManager : MonoBehaviour
     public GameObject screen3;
     public GameObject buttonsScreen;
 
+    public GameObject PauseScreen;
+
+    public GameObject player;
+
+    private bool gameEnded = false;
+
+    
+
 
 
 
@@ -26,6 +34,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         StartGame();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -36,8 +45,9 @@ public class gameManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(currentTime % 60);
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        if (currentTime <= 0f)
+        if (currentTime <= 0f && !gameEnded)
         {
+            gameEnded = true;
             timeEnded();
         }
 
@@ -46,8 +56,7 @@ public class gameManager : MonoBehaviour
     public void PlayerDied()
     {
         Time.timeScale = 0f; // Optional: freeze time
-        //deathScreenUI.SetActive(true);
-        StartCoroutine(GameEnd());
+        GameLose();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -56,7 +65,7 @@ public class gameManager : MonoBehaviour
     void timeEnded()
     {
         Time.timeScale = 0f; // Optional: freeze time
-        timesUpUI.SetActive(true);
+        StartCoroutine(GameWin());
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -68,25 +77,25 @@ public class gameManager : MonoBehaviour
         SceneManager.LoadScene(currentScene.name);
     }
 
-    public IEnumerator GameEnd()
+    public IEnumerator GameWin()
     {
-        deathScreenUI.SetActive(true);
+        timesUpUI.SetActive(true);
 
         //Screen 1
         screen1.SetActive(true);
-        screen2.SetActive(false);
+        screen2.SetActive(true);
         screen3.SetActive(false);
         buttonsScreen.SetActive(false);
         yield return new WaitForSecondsRealtime(4f);
 
         //screen 2
         screen1.SetActive(false);
-        screen2.SetActive(true);
         yield return new WaitForSecondsRealtime(5f);
 
         //screenn 3
-        screen2.SetActive(false);
         screen3.SetActive(true);
+        screen2.SetActive(false);
+
         yield return new WaitForSecondsRealtime(4f);
 
         //bring up buttons
@@ -97,11 +106,37 @@ public class gameManager : MonoBehaviour
 
     }
 
+    public void GameLose()
+    {
+        deathScreenUI.SetActive(true);
+    }
+
     public void StartGame()
     {
         Time.timeScale = 1f;
         //
         //timesUpUI.SetActive(false);
         currentTime = maxTime;
+    }
+
+    public void Pause()
+    {
+        PauseScreen.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        player.GetComponent<playerAttack>().enabled = false;
+        player.GetComponent<newPlayerMovement>().enabled = false;
+
+    }
+
+    public void UnPause()
+    {
+        PauseScreen.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        player.GetComponent<playerAttack>().enabled = true;
+        player.GetComponent<newPlayerMovement>().enabled = true;
     }
 }

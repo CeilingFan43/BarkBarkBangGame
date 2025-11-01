@@ -11,11 +11,6 @@ public class TallWolfAI : MonoBehaviour
 
    private Animator enemyAnimator;
 
-   //Animator bools
-   //private bool isWalking = false;
-   //private bool isRunning = false;
-   //private bool isAttacking = false;
-
    //Enmemy values
    public float health;
    public float damage = 10f;
@@ -26,6 +21,9 @@ public class TallWolfAI : MonoBehaviour
    public Transform player;
    public LayerMask Ground, Player;
    public PlayerManagement pm;
+
+   public GameObject aliveWolf;
+   public GameObject deadWolf;
    
 
    public Vector3 walkPoint;
@@ -171,17 +169,22 @@ private void Update()
 
       if (health <= 0)
       {
-         Die();
+         StartCoroutine(Die());
       }
    }
 
-   void Die()
+   IEnumerator Die()
    {
-      Debug.Log($"{gameObject.name} died.");
       audioManager.EndChase();
-      //playerPreviouslyDetected = false;
-      Destroy(gameObject);
+      agent.enabled=false;
+      aliveWolf.SetActive(false);
+      deadWolf.SetActive(true);
+
       Destroy(Instantiate(deathEffect, transform.position, Quaternion.identity) as GameObject, 2);
+
+      yield return new WaitForSeconds(4f);
+      Destroy(gameObject);
+
    }
 
    private System.Collections.IEnumerator StartAttackCooldown()

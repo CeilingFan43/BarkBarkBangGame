@@ -40,14 +40,11 @@ public class playerMovement : MonoBehaviour
         if (Input.GetKeyDown("left shift"))
         {
             running = true;
-            playerAnimator.SetBool("PlayerRunning", true);
-            
+        
         }
         else if (Input.GetKeyUp("left shift"))
         {
             running = false;
-            playerAnimator.SetBool("PlayerRunning", false);
-            
         }
 
         Vector3 forward = playerOrientation.forward;
@@ -62,12 +59,14 @@ public class playerMovement : MonoBehaviour
         playerOrientation.forward = moveDirection;
 
 
+        //Animation logic
+
         if(player.velocity.magnitude > 0.1f && running == false)
         {
             playerAnimator.SetBool("PlayerWalking", true);
         }
 
-        else
+        else if (player.velocity.magnitude < 0.1f)
         {
             playerAnimator.SetBool("PlayerWalking", false);
         }
@@ -86,12 +85,15 @@ public class playerMovement : MonoBehaviour
         //drain stamina.
         if (running)
         {
+            playerAnimator.SetBool("PlayerWalking", false);
+            playerAnimator.SetBool("PlayerRunning", true);
             currentStamina -= runCost * Time.deltaTime;
             if (currentStamina < 0)
             {
                 currentStamina = 0;
                 running = false;
                 PlayerRunning = false;
+                playerAnimator.SetBool("PlayerRunning", false);
             }
             stamina.fillAmount = currentStamina / maxStamina;
         }

@@ -9,7 +9,7 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Light DirectionalLightMoon;
     [SerializeField] private LightingConditions Preset;
     [SerializeField, Range(0, 24)] private float TimeOfDay;
-    public gameManager gameManager;
+    public GameManager gameManager;
     //add refernce to game manager for time left in game to calculate change of lighting 
 
     private void Update()
