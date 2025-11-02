@@ -93,7 +93,7 @@ public class playerAttack : MonoBehaviour
         playerAnimator.SetTrigger("PlayerAttack");
         // ADD IN A SCALE FACTOR TO ANIMATION TIME FOR CHARGE ATTACK !. MAYBE ADD A SEPARATE CHARGE ANIM TO CHARGING.
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.3f);
 
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackOrigin.position, attackRadius, enemyLayer);
