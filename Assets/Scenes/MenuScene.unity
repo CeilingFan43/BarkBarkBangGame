@@ -742,7 +742,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467594908}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 4f8f6211cf2137a48996fb5d12daae1b, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 7d2c7f292d72d8646b76ee10caa4e6e5, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -755,12 +755,14 @@ VideoPlayer:
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
   m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 1
@@ -1317,7 +1319,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1034188339}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 4f8f6211cf2137a48996fb5d12daae1b, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 7d2c7f292d72d8646b76ee10caa4e6e5, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1330,12 +1332,14 @@ VideoPlayer:
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
   m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
@@ -1427,8 +1431,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cass @: Art Lead\nArtstation @vvossy and \nInstagram @vvossyart\n\nReece
-    @ : Design Lead\n@gauntman99 on Instagram\n\n"
+  m_text: "Cass : Art Lead\nArtstation @vvossy and \nInstagram @vvossyart\n\nReece 
+    : Design Lead\n@gauntman99 on Instagram\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2532,7 +2536,7 @@ MonoBehaviour:
 
 
     Declan
-    @: Test Lead + Tech Lead
+    : Test Lead + Tech Lead
 
     @speck_ie on Instagram
 
@@ -2991,7 +2995,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You''re in the cold and ...
+  m_text: 'You''re in the cold and have to sruvive while there is a creepy presence
+    in the woods.
 
 
 
@@ -2999,13 +3004,12 @@ MonoBehaviour:
 
     WASD - movement
 
+    Left click - attack
+
     Left
-    click - attack
+    click (hold and release) - charge attack
 
-    Left click (hold and release) - charge attack
-
-    F - Lantern
-    on/off
+    F - Lantern on/off
 
     E - Interact'
   m_isRightToLeft: 0
@@ -3429,7 +3433,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Music by Blake
 
-    @
+    @Blake_henke77 on Instagram
 
 '
   m_isRightToLeft: 0
