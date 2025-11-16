@@ -10,6 +10,9 @@ public class TallWolfAI : MonoBehaviour
    private bool isChasing = false;
 
    private Animator enemyAnimator;
+   public GameObject tallWolf;
+
+   public bool alive = true;
 
    //Enmemy values
    public float health;
@@ -35,6 +38,9 @@ public class TallWolfAI : MonoBehaviour
 
    public GameObject deathEffect;
    public ParticleSystem deathParticles;
+
+   public GameObject hitEffect;
+   public ParticleSystem hitParticles;
 
    //Locating components and player
    private void Awake()
@@ -132,6 +138,8 @@ private void Update()
 		//transform.LookAt(player);
 
       // Attack the player if possible
+      if(alive)
+      {
       if (canAttack)
       {
          PlayerManagement pm = player.GetComponent<PlayerManagement>();
@@ -150,6 +158,7 @@ private void Update()
             StartCoroutine(StartAttackCooldown());
          }
       }
+      }
 
    }
 
@@ -166,6 +175,7 @@ private void Update()
    {
       health -= amount;
       Debug.Log($"{gameObject.name} took {amount} damage, {health} HP left.");
+      StartCoroutine(HitParticles());
 
       if (health <= 0)
       {
@@ -177,6 +187,9 @@ private void Update()
    {
       audioManager.StartCoroutine(audioManager.EndChase());
       agent.enabled=false;
+      alive = false;
+      
+      tallWolf.GetComponent<Collider>().enabled = false;
       aliveWolf.SetActive(false);
       deadWolf.SetActive(true);
 
@@ -192,6 +205,12 @@ private void Update()
       canAttack = false;
       yield return new WaitForSeconds(attackCooldown);
       canAttack = true;
+   }
+
+   public IEnumerator HitParticles()
+   {
+      Destroy(Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject, 2);
+      yield break;
    }
 }
     

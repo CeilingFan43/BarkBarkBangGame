@@ -89,6 +89,7 @@ MonoBehaviour:
   health: 100
   damage: 10
   attackCooldown: 3
+  alive: 1
   pounceRange: 10
   pounceForce: 10
   aliveWolf: {fileID: 8272975259966659347}
@@ -111,6 +112,8 @@ MonoBehaviour:
   inPounceRange: 0
   deathEffect: {fileID: 4486101655351129312, guid: 0a2f3ebc8b825124e8066fcef50c17ef, type: 3}
   deathParticles: {fileID: 2230488035642009543, guid: 0a2f3ebc8b825124e8066fcef50c17ef, type: 3}
+  hitEffect: {fileID: 4486101655351129312, guid: 81402a06b924aa1448ebe45b098e48e1, type: 3}
+  hitParticles: {fileID: 2230488035642009543, guid: 81402a06b924aa1448ebe45b098e48e1, type: 3}
 --- !u!54 &857294362784054292
 Rigidbody:
   m_ObjectHideFlags: 0

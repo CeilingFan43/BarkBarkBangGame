@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7787a35eb02a3924cbae11e0d690f69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tallWolf: {fileID: 4430974008255123586}
+  alive: 1
   health: 150
   damage: 10
   attackCooldown: 1.5
@@ -93,6 +95,8 @@ MonoBehaviour:
   playerInAttackRange: 0
   deathEffect: {fileID: 4486101655351129312, guid: 0a2f3ebc8b825124e8066fcef50c17ef, type: 3}
   deathParticles: {fileID: 2230488035642009543, guid: 0a2f3ebc8b825124e8066fcef50c17ef, type: 3}
+  hitEffect: {fileID: 4486101655351129312, guid: 81402a06b924aa1448ebe45b098e48e1, type: 3}
+  hitParticles: {fileID: 2230488035642009543, guid: 81402a06b924aa1448ebe45b098e48e1, type: 3}
 --- !u!64 &6224313090966120509
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -187,7 +191,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5144361945402142534, guid: 385b0fde3a0b26540a8aea959c43bcd0, type: 3}
+    - {fileID: -1771216564546194796, guid: 385b0fde3a0b26540a8aea959c43bcd0, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 385b0fde3a0b26540a8aea959c43bcd0, type: 3}
 --- !u!1 &558351268352799635 stripped

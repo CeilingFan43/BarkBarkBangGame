@@ -16,6 +16,9 @@ public class SmallWolfAI : MonoBehaviour
    public float damage = 10f;
    public float attackCooldown = 2f;
 
+   
+   public bool alive = true;
+
    //Pounce attack stuff
    public float pounceRange;
    private bool isPouncing = false;
@@ -47,6 +50,9 @@ public class SmallWolfAI : MonoBehaviour
 
    public GameObject deathEffect;
    public ParticleSystem deathParticles;
+
+   public GameObject hitEffect;
+   public ParticleSystem hitParticles;
 
    //Locating components and player
    private void Awake()
@@ -226,6 +232,8 @@ private void Update()
 		//transform.LookAt(player);
 
       // Attack the player if possible
+      if(alive)
+      {
       if (canAttack)
       {
          PlayerManagement pm = player.GetComponent<PlayerManagement>();
@@ -236,6 +244,7 @@ private void Update()
             pm.PlayerTakeDamage(damage);
             StartCoroutine(StartAttackCooldown());
          }
+      }
       }
 
    }
@@ -257,6 +266,7 @@ private void Update()
    {
       health -= amount;
       Debug.Log($"{gameObject.name} took {amount} damage, {health} HP left.");
+      StartCoroutine(HitParticles());
 
       if (health <= 0)
       {
@@ -268,6 +278,8 @@ private void Update()
    {
       audioManager.StartCoroutine(audioManager.EndChase());
       agent.enabled=false;
+      alive = false;
+      //aliveWolf.GetComponent<Collider>().enabled = false;
       aliveWolf.SetActive(false);
       deadWolf.SetActive(true);
 
@@ -283,5 +295,12 @@ private void Update()
       yield return new WaitForSeconds(attackCooldown);
       canAttack = true;
    }
+
+   public IEnumerator HitParticles()
+   {
+      Destroy(Instantiate(hitEffect, transform.position, Quaternion.identity) as GameObject, 2);
+      yield break;
+   }
+
 }
     
