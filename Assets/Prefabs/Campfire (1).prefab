@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 657308874088570952}
+  - component: {fileID: 9116484187555992953}
   m_Layer: 0
   m_Name: Campfire (1)
   m_TagString: Untagged
@@ -118,6 +119,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9116484187555992953
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168016769686092530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 52.192345, y: 39.09306, z: 49.88}
+  m_Center: {x: 0.40946043, y: 16.921312, z: 0}
 --- !u!1 &778666996356365115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1102,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.7130422, b: 0.28930813, a: 1}
+      maxColor: {r: 0.9056604, g: 0.62194717, b: 0.20220712, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
